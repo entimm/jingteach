@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IndexController@index');
+Route::get('/data', 'IndexController@data');
+Route::post('/submit', 'IndexController@submit');
+
+Route::view('/success', 'success');
+
+Route::view('/login', 'login');
+Route::post('/login', 'UserController@login');
+Route::get('/quit', 'UserController@quit');

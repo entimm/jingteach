@@ -1,0 +1,68 @@
+body, html {
+    height: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.black {
+    background-color: #000;
+    color: #f7f7f7;
+}
+
+.page {
+    padding-top: 5em;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+.container, .page {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.container {
+    overflow: hidden;
+}
+
+.page__bd_spacing {
+    padding: 0 16px;
+}
+
+.page__ft.j_bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 10px;
+}
+
+.center-in-center {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.weui-btn_disabled {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.picture {
+    text-align: center;
+    line-height: 1em;
+    font-size: 5em;
+}
+
+#play_desc {
+    margin: 10px;
+    font-size: 0.8em;
+    color: #656565;
+}
