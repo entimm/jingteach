@@ -20,3 +20,8 @@ Route::view('/success', 'success');
 Route::view('/login', 'login');
 Route::post('/login', 'UserController@login');
 Route::get('/quit', 'UserController@quit');
+
+Route::get('export_raw/{start?}/{end?}', 'IndexController@exportRaw');
+Route::get('export/{start?}/{end?}', 'IndexController@export');
+
+Route::get('/result', 'IndexController@lastResult');

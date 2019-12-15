@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Data;
+use App\Exports\DataExport;
+use App\Exports\DataRawExport;
 use App\Http\Requests\DataRequest;
 use Illuminate\Http\Request;
 
@@ -58,6 +60,39 @@ class IndexController extends Controller
             'data' => $request->input('data'),
         ];
 
-        Data::create($data);
+        $result = Data::create($data);
+
+        session(['last_id' => $result->id]);
+    }
+
+    public function lastResult()
+    {
+        $result = Data::where('id', session('last_id'))->first();
+
+        return view('result', ['result' => $result]);
+    }
+
+    public function exportRaw($start = null, $end = null)
+    {
+        $end = $end ?? $start;
+
+        $filter = [
+            'start' => $start,
+            'end' => $end,
+        ];
+
+        return (new DataRawExport($filter))->download('data_raw.xlsx');
+    }
+
+    public function export($start = null, $end = null)
+    {
+        $end = $end ?? $start;
+
+        $filter = [
+            'start' => $start,
+            'end' => $end,
+        ];
+
+        return (new DataExport($filter))->download('data.xlsx');
     }
 }
