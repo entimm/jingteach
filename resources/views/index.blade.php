@@ -6,7 +6,7 @@
 
     <title>教育研究调查</title>
 
-    <link rel="stylesheet" href="weui.css?3<?=time()?>"/>
+    <link rel="stylesheet" href="weui.css?v1"/>
     <link rel="stylesheet" href="play.css"/>
 </head>
 <body ontouchstart>
@@ -15,10 +15,10 @@
         <div id="play_desc" class="page__desc"></div>
     </div>
     <div id="list" class="center-in-center">
-        {{-- <div class="picture" id="countdown">3</div> --}}
-        <div class="picture" id="pos1">&nbsp</div>
-        <div class="picture" id="pos2">&nbsp</div>
-        <div class="picture" id="pos3">&nbsp</div>
+        <div class="picture" id="countdown"></div>
+        <div class="picture" id="pos1"></div>
+        <div class="picture" id="pos2"></div>
+        <div class="picture" id="pos3"></div>
     </div>
     <div class="page flex">
         <div class="page__ft j_bottom">
@@ -37,17 +37,20 @@
 <script src="zepto.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        // countdown(3);
-        getData();
+        countdown(3);
+        // getData();
     });
 
     function countdown($count) {
         if ($count <= 0) {
-            $('body').addClass();
             $('#countdown').html('GO');
+            $('#countdown').animate({
+              opacity: 0,
+              scale:2,
+            }, 500, 'ease-out');
             setTimeout(function () {
-                $('body').removeClass('black');
                 $('#countdown').html('');
+                getData();
             }, 1000);
             return;
         }
