@@ -7,7 +7,7 @@
     <title>教育研究调查</title>
 
     <!-- 引入 WeUI -->
-    <link rel="stylesheet" href="weui.css"/>
+    <link rel="stylesheet" href="/weui.css"/>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
@@ -62,7 +62,7 @@
     </div>
 </div>
 
-<script src="zepto.min.js"></script>
+<script src="/zepto.min.js"></script>
 <script type="text/javascript">
     $(function () {
         var $toastSuccess = $('#js_toast_success');

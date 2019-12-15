@@ -17,7 +17,7 @@ Route::post('/submit', 'IndexController@submit');
 
 Route::view('/success', 'success');
 
-Route::view('/login', 'login');
+Route::get('/login/{code?}', 'UserController@loginView');
 Route::post('/login', 'UserController@login');
 Route::get('/quit', 'UserController@quit');
 

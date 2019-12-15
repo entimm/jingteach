@@ -6,8 +6,8 @@
 
     <title>教育研究调查</title>
 
-    <link rel="stylesheet" href="weui.css"/>
-    <link rel="stylesheet" href="play.css"/>
+    <link rel="stylesheet" href="/weui.css"/>
+    <link rel="stylesheet" href="/play.css"/>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
@@ -22,6 +22,9 @@
                 <p class="weui-btn-area">
                     <a href="/" class="weui-btn weui-btn_primary">再玩一次</a>
                     <a href="/quit" class="weui-btn weui-btn_default">退出</a>
+                    @if (session('admin'))
+                        <a href="/result" class="weui-btn weui-btn_default">查看结果</a>
+                    @endif
                 </p>
             </div>
 

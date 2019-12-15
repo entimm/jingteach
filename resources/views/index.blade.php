@@ -6,8 +6,8 @@
 
     <title>教育研究调查</title>
 
-    <link rel="stylesheet" href="weui.css?v1"/>
-    <link rel="stylesheet" href="play.css"/>
+    <link rel="stylesheet" href="/weui.css"/>
+    <link rel="stylesheet" href="/play.css?v1"/>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
@@ -34,7 +34,7 @@
     </div>
 </div>
 
-<script src="zepto.min.js"></script>
+<script src="/zepto.min.js"></script>
 <script type="text/javascript">
     $(function () {
         countdown(3);
