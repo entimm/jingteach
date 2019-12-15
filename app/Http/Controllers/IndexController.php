@@ -69,6 +69,8 @@ class IndexController extends Controller
     {
         $result = Data::where('id', session('last_id'))->first();
 
+        if (!$result) return;
+
         return view('result', ['result' => $result]);
     }
 

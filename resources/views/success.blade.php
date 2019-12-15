@@ -7,7 +7,12 @@
     <title>教育研究调查</title>
 
     <link rel="stylesheet" href="/weui.css"/>
-    <link rel="stylesheet" href="/play.css"/>
+    <link rel="stylesheet" href="/play.css?v2"/>
+    <style type="text/css">
+        .weui-btn-area .weui-btn {
+            margin-bottom: 40px;
+        }
+    </style>
 </head>
 <body ontouchstart>
 <div class="container" id="container">

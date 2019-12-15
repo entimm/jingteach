@@ -7,7 +7,7 @@
     <title>教育研究调查</title>
 
     <link rel="stylesheet" href="/weui.css"/>
-    <link rel="stylesheet" href="/play.css?v1"/>
+    <link rel="stylesheet" href="/play.css?v2"/>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
@@ -46,7 +46,7 @@
             $('#countdown').html('GO');
             $('#countdown').animate({
               opacity: 0,
-              scale:2,
+              scale:1.3,
             }, 500, 'ease-out');
             setTimeout(function () {
                 $('#countdown').html('');
