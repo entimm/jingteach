@@ -45,7 +45,12 @@ body, html {
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
-
+.weui-flex__item {
+    padding: 0 10px;
+}
+.weui-flex__item .weui-btn {
+    width: auto;
+}
 .weui-btn_disabled {
     color: rgba(0, 0, 0, 0.6);
 }

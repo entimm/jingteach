@@ -7,7 +7,7 @@
     <title>教育研究调查</title>
 
     <link rel="stylesheet" href="/weui.css"/>
-    <link rel="stylesheet" href="/play.css?v2"/>
+    <link rel="stylesheet" href="/play.css?v3"/>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
@@ -27,7 +27,7 @@
                     <a href="javascript:;" id="left" class="weui-btn weui-btn_primary weui-btn_disabled">⬅⬅⬅</a>
                 </div>
                 <div class="weui-flex__item">
-                    <a href="javascript:;" id="right" class="weui-btn weui-btn_primary weui-btn_disabled">➡➡➡</a>
+                    <a href="javascript:;" id="right" class="weui-btn weui-btn_primary weui-btn_disabled">⮕⮕⮕</a>
                 </div>
             </div>
         </div>
@@ -47,6 +47,22 @@
         countdown(3);
         // getData();
     });
+
+    Date.prototype.Format = function (fmt) {
+        var o = {
+            "m+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "i+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length))
+        for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)))
+        return fmt;
+    }
 
     function countdown($count) {
         if ($count <= 0) {
@@ -74,6 +90,7 @@
     var $RTTime = 0;
     var $RTStart = 0;
     var $RTEnd = 0;
+    var $startTime = 0;
 
     function getData() {
         $.get('/data', function (response) {
@@ -97,21 +114,13 @@
 
         $('#left').click(function(event) {
             if (4 != $currentStep) return;
-            disable();
-            $RTEnd = Date.now();
-            $RTTime = $RTEnd - $RTStart;
-            console.log('你点击了➡,$currentRound='+$currentRound+'$currentStep='+$currentStep);
+            // console.log('你点击了⮕,$currentRound='+$currentRound+'$currentStep='+$currentStep);
             action($currentRound, 1, $RTTime);
-            play();
         });
         $('#right').click(function(event) {
             if (4 != $currentStep) return;
-            disable();
-            $RTEnd = Date.now();
-            $RTTime = $RTEnd - $RTStart;
-            console.log('你点击了⬅,$currentRound='+$currentRound+'$currentStep='+$currentStep);
+            // console.log('你点击了⬅,$currentRound='+$currentRound+'$currentStep='+$currentStep);
             action($currentRound, 2, $RTTime);
-            play();
         });
 
         function enabled() {
@@ -125,12 +134,18 @@
         }
 
         function action($currentRound, $answer, $costTime) {
+            $RTEnd = Date.now();
+            $RTTime = $RTEnd - $RTStart;
+
+            disable();
+            play();
+
             $round = $roundList[$currentRound - 1];
             if ($answer == $correctMap[$goalList[$round.goalId][1]]) {
-                console.log('对！');
+                // console.log('对！');
                 $audioOk.play();
             } else {
-                console.log('错！');
+                // console.log('错！');
                 $audioBad.play();
             }
             $submitData.push({
@@ -143,12 +158,17 @@
         }
 
         function end() {
-            console.log('submit', $submitData);
-            $.post('/submit', {data: $submitData}, function (response) {
-                console.log('success');
-                setTimeout(function () {
-                    window.location.href = '/success';
-                }, 1000);
+            // console.log('submit', $submitData);
+            $.ajax({
+                type: 'POST',
+                url: '/submit',
+                data: JSON.stringify({ data: $submitData }),
+                contentType: 'application/json',
+                success: function(data) {
+                    setTimeout(function () {
+                        window.location.href = '/success';
+                    }, 1000);
+                }
             });
         }
 
@@ -172,7 +192,7 @@
                     $timeOut = step3();
                     break;
                 case 4:
-                    console.log($round);
+                    // console.log($round);
                     $RTStart = Date.now();
                     $RTEnd = 0;
                     $timeOut = step4($goalList[$round.goalId]);
@@ -183,18 +203,17 @@
                     $timeOut = step5();
                     break;
             }
-            $('#play_desc').html('步骤:' + $currentStep + ' 回合:'+ $currentRound + ' 停留毫秒:' + ($timeOut ? $timeOut : '--'));
             if ($currentRound > $roundList.length) {
                 end();
                 return;
             }
 
+            $('#play_desc').html('步骤:' + $currentStep + ' 回合:'+ $currentRound + ' 停留毫秒:' + ($timeOut ? $timeOut : '--'));
+
             if (4 == $currentStep) {
                 setTimeout(function() {
                     if (!$RTEnd) {
-                        disable();
                         action($currentRound, 0, 0);
-                        play();
                     }
                 }, 1700);
             } else {
@@ -203,6 +222,9 @@
         }
 
         function step1() {
+            // console.log('time:'+new Date().Format('hh:ii:ss')+' gap:'+(Date.now()-$startTime)+' round:'+$currentRound);
+            $startTime = Date.now();
+
             $('#pos1').html('&nbsp');
             $('#pos2').html('✚');
             $('#pos3').html('&nbsp');
@@ -250,7 +272,10 @@
             $('#pos2').html('✚');
             $('#pos3').html('&nbsp');
 
-            return 3500 - $RTTime - $d1Time;
+            // console.log('t1='+$d1Time+' t2='+$RTTime+' t3='+(3500 - $RTTime - $d1Time - 500));
+
+            // 3500 - $RTTime - $d1Time - 500
+            return 3500 - (Date.now() - $startTime);
         }
 
         function drawGuide($guideId) {
@@ -271,16 +296,16 @@
             var $result = '';
             switch ($goal) {
                 case 1:
-                    $result = '➡➡➡➡➡';
+                    $result = '⮕⮕⮕⮕⮕';//➡▶◀←→➨
                     break;
                 case 2:
                     $result = '⬅⬅⬅⬅⬅';
                     break;
                 case 3:
-                    $result = '➡➡⬅➡➡';
+                    $result = '⮕⮕⬅⮕⮕';
                     break;
                 case 4:
-                    $result = '⬅⬅➡⬅⬅';
+                    $result = '⬅⬅⮕⬅⬅';
                     break;
             }
 

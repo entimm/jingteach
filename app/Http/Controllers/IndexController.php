@@ -93,7 +93,7 @@ class IndexController extends Controller
         ];
 
         $roundList = [];
-        for ($i=0; $i < 10; $i++) {
+        for ($i=0; $i < 1; $i++) {
             $roundList[] = $situations;
         }
         $roundList = array_merge(...$roundList);
@@ -107,14 +107,15 @@ class IndexController extends Controller
         ];
     }
 
-    public function submit(DataRequest $request)
+    public function submit(Request $request)
     {
         $data = [
             'school' => session('school'),
             'class' => session('class'),
             'student_no' => session('student_no'),
+            'user_agent' => $request->userAgent(),
             'ip' => $request->ip(),
-            'data' => $request->input('data'),
+            'data' => $request->all(),
         ];
 
         $result = Data::create($data);
