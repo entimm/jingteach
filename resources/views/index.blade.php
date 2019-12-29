@@ -24,7 +24,7 @@
         <div class="page__ft j_bottom">
             <div class="weui-flex">
                 <div class="weui-flex__item">
-                    <a href="javascript:;" id="left" class="weui-btn weui-btn_default weui-btn_disabled">⬅⬅⬅</a>
+                    <a href="javascript:;" id="left" class="weui-btn weui-btn_primary weui-btn_disabled">⬅⬅⬅</a>
                 </div>
                 <div class="weui-flex__item">
                     <a href="javascript:;" id="right" class="weui-btn weui-btn_primary weui-btn_disabled">➡➡➡</a>
@@ -33,6 +33,13 @@
         </div>
     </div>
 </div>
+
+<audio id="ok-tip">
+    <source = src="/ok.mp3" type="audio/mp3">
+</audio>
+<audio id="bad-tip">
+    <source = src="/bad.mp3" type="audio/mp3">
+</audio>
 
 <script src="/zepto.min.js"></script>
 <script type="text/javascript">
@@ -79,8 +86,12 @@
         var $roundList = $data.roundList;
         var $guideList = $data.guideList;
         var $goalList = $data.goalList;
+        var $correctMap = $data.correctMap;
 
         var $submitData = [];
+
+        var $audioOk = document.getElementById("ok-tip");
+        var $audioBad = document.getElementById("bad-tip");
 
         play();
 
@@ -114,14 +125,21 @@
         }
 
         function action($currentRound, $answer, $costTime) {
-            $round = $roundList[$currentRound - 1]
+            $round = $roundList[$currentRound - 1];
+            if ($answer == $correctMap[$goalList[$round.goalId][1]]) {
+                console.log('对！');
+                $audioOk.play();
+            } else {
+                console.log('错！');
+                $audioBad.play();
+            }
             $submitData.push({
                 'round': $currentRound,
                 'guideId': $round.guideId,
                 'goalId': $round.goalId,
                 'answer': $answer,
                 'cost_time': $costTime,
-            })
+            });
         }
 
         function end() {
@@ -210,11 +228,19 @@
             return 400;
         }
 
-        function step4($goalId) {
-            var $result = drawGoal($goalId);
-            $('#pos1').html('&nbsp');
-            $('#pos2').html($result);
-            $('#pos3').html('&nbsp');
+        function step4($goalInfo) {
+            var $pos = $goalInfo[0];
+            var $result = drawGoal($goalInfo[1]);
+
+            if ($pos) {
+                $('#pos1').html('&nbsp');
+                $('#pos2').html('✚');
+                $('#pos3').html($result);
+            } else {
+                $('#pos1').html($result);
+                $('#pos2').html('✚');
+                $('#pos3').html('&nbsp');
+            }
 
             return 0;
         }
@@ -241,25 +267,19 @@
             return $result;
         }
 
-        function drawGoal($goalId) {
+        function drawGoal($goal) {
             var $result = '';
-            switch ($goalId) {
+            switch ($goal) {
                 case 1:
-                    $result = '➡';
-                    break;
-                case 2:
-                    $result = '⬅';
-                    break;
-                case 3:
                     $result = '➡➡➡➡➡';
                     break;
-                case 4:
+                case 2:
                     $result = '⬅⬅⬅⬅⬅';
                     break;
-                case 5:
+                case 3:
                     $result = '➡➡⬅➡➡';
                     break;
-                case 6:
+                case 4:
                     $result = '⬅⬅➡⬅⬅';
                     break;
             }

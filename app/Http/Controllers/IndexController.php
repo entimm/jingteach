@@ -22,31 +22,88 @@ class IndexController extends Controller
     public function data()
     {
         $guideList = [
-            1 => [1, 0, 0],
-            2 => [2, 0, 0],
+            1 => [0, 1, 0],
+            2 => [0, 2, 0],
             3 => [2, 1, 2],
             4 => [2, 1, 0],
             5 => [0, 1, 2],
         ];
         $goalList = [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
+            1 => [0, 1],
+            2 => [1, 1],
+            3 => [0, 2],
+            4 => [1, 2],
+            5 => [0, 3],
+            6 => [1, 3],
+            7 => [0, 4],
+            8 => [1, 4],
         ];
+        $correctMap = [
+            1 => 2,
+            2 => 1,
+            3 => 1,
+            4 => 2,
+        ];
+
+        $situations = [
+            ['guideId' => 1, 'goalId' => 1],
+            ['guideId' => 1, 'goalId' => 2],
+            ['guideId' => 1, 'goalId' => 3],
+            ['guideId' => 1, 'goalId' => 4],
+            ['guideId' => 1, 'goalId' => 5],
+            ['guideId' => 1, 'goalId' => 6],
+            ['guideId' => 1, 'goalId' => 7],
+            ['guideId' => 1, 'goalId' => 8],
+
+            ['guideId' => 2, 'goalId' => 1],
+            ['guideId' => 2, 'goalId' => 2],
+            ['guideId' => 2, 'goalId' => 3],
+            ['guideId' => 2, 'goalId' => 4],
+            ['guideId' => 2, 'goalId' => 5],
+            ['guideId' => 2, 'goalId' => 6],
+            ['guideId' => 2, 'goalId' => 7],
+            ['guideId' => 2, 'goalId' => 8],
+
+            ['guideId' => 3, 'goalId' => 1],
+            ['guideId' => 3, 'goalId' => 2],
+            ['guideId' => 3, 'goalId' => 3],
+            ['guideId' => 3, 'goalId' => 4],
+            ['guideId' => 3, 'goalId' => 5],
+            ['guideId' => 3, 'goalId' => 6],
+            ['guideId' => 3, 'goalId' => 7],
+            ['guideId' => 3, 'goalId' => 8],
+
+            ['guideId' => 4, 'goalId' => 1],
+            ['guideId' => 4, 'goalId' => 1],
+            ['guideId' => 4, 'goalId' => 3],
+            ['guideId' => 4, 'goalId' => 3],
+            ['guideId' => 4, 'goalId' => 5],
+            ['guideId' => 4, 'goalId' => 5],
+            ['guideId' => 4, 'goalId' => 7],
+            ['guideId' => 4, 'goalId' => 7],
+
+            ['guideId' => 5, 'goalId' => 2],
+            ['guideId' => 5, 'goalId' => 2],
+            ['guideId' => 5, 'goalId' => 4],
+            ['guideId' => 5, 'goalId' => 4],
+            ['guideId' => 5, 'goalId' => 6],
+            ['guideId' => 5, 'goalId' => 6],
+            ['guideId' => 5, 'goalId' => 8],
+            ['guideId' => 5, 'goalId' => 8],
+        ];
+
+        $roundList = [];
+        for ($i=0; $i < 10; $i++) {
+            $roundList[] = $situations;
+        }
+        $roundList = array_merge(...$roundList);
+        shuffle($roundList);
 
         return [
             'guideList' => $guideList,
             'goalList' => $goalList,
-            'roundList' => [
-                ['guideId' => 1, 'goalId' => 1],
-                ['guideId' => 2, 'goalId' => 2],
-                ['guideId' => 3, 'goalId' => 3],
-                ['guideId' => 4, 'goalId' => 4],
-                ['guideId' => 5, 'goalId' => 5],
-            ],
+            'correctMap' => $correctMap,
+            'roundList' => $roundList,
         ];
     }
 
