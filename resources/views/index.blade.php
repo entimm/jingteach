@@ -7,7 +7,7 @@
     <title>教育研究调查</title>
 
     <link rel="stylesheet" href="/weui.css"/>
-    <link rel="stylesheet" href="/play.css?v3"/>
+    <link rel="stylesheet" href="/play.css?v5"/>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
@@ -24,10 +24,10 @@
         <div class="page__ft j_bottom">
             <div class="weui-flex">
                 <div class="weui-flex__item">
-                    <a href="javascript:;" id="left" class="weui-btn weui-btn_primary weui-btn_disabled">⬅⬅⬅</a>
+                    <a href="javascript:;" id="left" class="weui-btn weui-btn_primary weui-btn_disabled"><span>⬅⬅⬅</span></a>
                 </div>
                 <div class="weui-flex__item">
-                    <a href="javascript:;" id="right" class="weui-btn weui-btn_primary weui-btn_disabled">⮕⮕⮕</a>
+                    <a href="javascript:;" id="right" class="weui-btn weui-btn_primary weui-btn_disabled"><span class="flip">⬅⬅⬅</span></a>
                 </div>
             </div>
         </div>
@@ -114,12 +114,12 @@
 
         $('#left').click(function(event) {
             if (4 != $currentStep) return;
-            // console.log('你点击了⮕,$currentRound='+$currentRound+'$currentStep='+$currentStep);
+            // console.log('你点击了右,$currentRound='+$currentRound+'$currentStep='+$currentStep);
             action($currentRound, 1, $RTTime);
         });
         $('#right').click(function(event) {
             if (4 != $currentStep) return;
-            // console.log('你点击了⬅,$currentRound='+$currentRound+'$currentStep='+$currentStep);
+            // console.log('你点击了左,$currentRound='+$currentRound+'$currentStep='+$currentStep);
             action($currentRound, 2, $RTTime);
         });
 
@@ -226,7 +226,7 @@
             $startTime = Date.now();
 
             $('#pos1').html('&nbsp');
-            $('#pos2').html('✚');
+            $('#pos2').html('<span>✚</span>');
             $('#pos3').html('&nbsp');
 
             $d1Time = getRandomInt(400, 1600);
@@ -244,7 +244,7 @@
 
         function step3() {
             $('#pos1').html('&nbsp');
-            $('#pos2').html('✚');
+            $('#pos2').html('<span>✚</span>');
             $('#pos3').html('&nbsp');
 
             return 400;
@@ -256,11 +256,11 @@
 
             if ($pos) {
                 $('#pos1').html('&nbsp');
-                $('#pos2').html('✚');
+                $('#pos2').html('<span>✚</span>');
                 $('#pos3').html($result);
             } else {
                 $('#pos1').html($result);
-                $('#pos2').html('✚');
+                $('#pos2').html('<span>✚</span>');
                 $('#pos3').html('&nbsp');
             }
 
@@ -269,7 +269,7 @@
 
         function step5() {
             $('#pos1').html('&nbsp');
-            $('#pos2').html('✚');
+            $('#pos2').html('<span>✚</span>');
             $('#pos3').html('&nbsp');
 
             // console.log('t1='+$d1Time+' t2='+$RTTime+' t3='+(3500 - $RTTime - $d1Time - 500));
@@ -282,10 +282,10 @@
             var $result = '&nbsp';
             switch ($guideId) {
                 case 1:
-                    $result = '✚';
+                    $result = '<span>✚</span>';
                     break;
                 case 2:
-                    $result = '✻';
+                    $result = '<span>✻</span>';
                     break;
             }
 
@@ -296,16 +296,16 @@
             var $result = '';
             switch ($goal) {
                 case 1:
-                    $result = '⮕⮕⮕⮕⮕';//➡▶◀←→➨
+                    $result = `<span class="flip">⬅⬅⬅⬅⬅</span>`;
                     break;
                 case 2:
-                    $result = '⬅⬅⬅⬅⬅';
+                    $result = `<span>⬅⬅⬅⬅⬅</span>`;
                     break;
                 case 3:
-                    $result = '⮕⮕⬅⮕⮕';
+                    $result = `<span class="flip">⬅⬅</span><span>⬅</span><span class="flip">⬅⬅</span>`;
                     break;
                 case 4:
-                    $result = '⬅⬅⮕⬅⬅';
+                    $result = `<span>⬅⬅</span><span class="flip">⬅</span><span>⬅⬅</span>`;
                     break;
             }
 

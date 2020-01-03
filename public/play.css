@@ -1,7 +1,6 @@
 body, html {
     height: 100%;
     -webkit-tap-highlight-color: transparent;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .page {
@@ -66,4 +65,18 @@ body, html {
     margin: 10px;
     font-size: 0.8em;
     color: #656565;
+}
+
+.picture span {
+    display: inline-block;
+}
+.picture span.flip {
+    transform: scale(-1, 1);
+}
+
+.weui-btn span {
+    display: inline-block;
+}
+.weui-btn span.flip {
+    transform: scale(-1, 1);
 }
