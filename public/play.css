@@ -59,6 +59,7 @@ body, html {
     text-align: center;
     line-height: 1em;
     font-size: 15vmin;
+    white-space: nowrap;
 }
 
 #play_desc {
