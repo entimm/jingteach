@@ -93,7 +93,7 @@ class IndexController extends Controller
         ];
 
         $roundList = [];
-        for ($i=0; $i < 1; $i++) {
+        for ($i=0; $i < 10; $i++) {
             $roundList[] = $situations;
         }
         $roundList = array_merge(...$roundList);
