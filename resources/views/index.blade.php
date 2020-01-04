@@ -162,7 +162,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/submit',
-                data: JSON.stringify({ data: $submitData }),
+                data: JSON.stringify({ $submitData }),
                 contentType: 'application/json',
                 success: function(data) {
                     setTimeout(function () {
