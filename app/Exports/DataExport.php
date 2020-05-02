@@ -40,6 +40,11 @@ class DataExport implements FromArray, WithHeadings
                     'goalId' => $one['goalId'],
                     'answer' => $one['answer'],
                     'cost_time' => $one['cost_time'],
+                    'time_cost1' => $one['time_details'][1],
+                    'time_cost2' => $one['time_details'][2],
+                    'time_cost3' => $one['time_details'][3],
+                    'time_cost4' => $one['time_details'][4],
+                    'time_cost5' => $one['time_details'][5],
                     'created_at' => $item->created_at,
                     'updated_at' => $item->updated_at,
             ];
@@ -65,6 +70,11 @@ class DataExport implements FromArray, WithHeadings
             '目标',
             '回答',
             '耗时',
+            '步骤1',
+            '步骤2',
+            '步骤3',
+            '步骤4',
+            '步骤5',
             '创建时间',
             '修改时间',
         ];

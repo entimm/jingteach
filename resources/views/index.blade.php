@@ -24,10 +24,10 @@
         <div class="page__ft j_bottom">
             <div class="weui-flex">
                 <div class="weui-flex__item">
-                    <a href="javascript:;" id="left" class="weui-btn weui-btn_primary weui-btn_disabled"><span>⬅⬅⬅</span></a>
+                    <a href="javascript:;" id="left" class="weui-btn weui-btn_primary weui-btn_disabled btn"><span>🐟</span></a>
                 </div>
                 <div class="weui-flex__item">
-                    <a href="javascript:;" id="right" class="weui-btn weui-btn_primary weui-btn_disabled"><span class="flip">⬅⬅⬅</span></a>
+                    <a href="javascript:;" id="right" class="weui-btn weui-btn_primary weui-btn_disabled btn"><span class="flip">🐟</span></a>
                 </div>
             </div>
         </div>
@@ -92,6 +92,11 @@
     var $RTEnd = 0;
     var $startTime = 0;
 
+    var $settings = {};
+
+    var $oneRoundCost = {};
+    var $oneRoundAws = {};
+
     function getData() {
         $.get('/data', function (response) {
             var $data = response;
@@ -104,6 +109,8 @@
         var $guideList = $data.guideList;
         var $goalList = $data.goalList;
         var $correctMap = $data.correctMap;
+
+        $settings = $data.settings;
 
         var $submitData = [];
 
@@ -134,6 +141,11 @@
         }
 
         function action($currentRound, $answer, $costTime) {
+            $oneRoundAws = {
+                'answer': $answer,
+                'cost_time': $costTime,
+            };
+            hook($currentRound, 4, $costTime ? $costTime : $settings.t3);
             $RTEnd = Date.now();
             $RTTime = $RTEnd - $RTStart;
 
@@ -148,16 +160,9 @@
                 // console.log('错！');
                 $audioBad.play();
             }
-            $submitData.push({
-                'round': $currentRound,
-                'guideId': $round.guideId,
-                'goalId': $round.goalId,
-                'answer': $answer,
-                'cost_time': $costTime,
-            });
         }
 
-        function end() {
+        function gameover() {
             // console.log('submit', $submitData);
             $.ajax({
                 type: 'POST',
@@ -177,6 +182,11 @@
             if ($currentStep > 5) {
                 $currentStep = 1;
                 $currentRound++;
+            }
+
+            if ($currentRound > $roundList.length) {
+                gameover();
+                return;
             }
 
             $timeOut = 0;
@@ -203,10 +213,6 @@
                     $timeOut = step5();
                     break;
             }
-            if ($currentRound > $roundList.length) {
-                end();
-                return;
-            }
 
             $('#play_desc').html('步骤:' + $currentStep + ' 回合:'+ $currentRound + ' 停留毫秒:' + ($timeOut ? $timeOut : '--'));
 
@@ -215,8 +221,9 @@
                     if (!$RTEnd) {
                         action($currentRound, 0, 0);
                     }
-                }, 1700);
+                }, $settings.t3);
             } else {
+                hook($currentRound, $currentStep, $timeOut);
                 setTimeout(play, $timeOut);
             }
         }
@@ -239,7 +246,7 @@
             $('#pos2').html(drawGuide($guide[1]));
             $('#pos3').html(drawGuide($guide[2]));
 
-            return 100;
+            return $settings.t1;
         }
 
         function step3() {
@@ -247,7 +254,7 @@
             $('#pos2').html('<span>✚</span>');
             $('#pos3').html('&nbsp');
 
-            return 400;
+            return $settings.t2;
         }
 
         function step4($goalInfo) {
@@ -275,7 +282,7 @@
             // console.log('t1='+$d1Time+' t2='+$RTTime+' t3='+(3500 - $RTTime - $d1Time - 500));
 
             // 3500 - $RTTime - $d1Time - 500
-            return 3500 - (Date.now() - $startTime);
+            return Math.max(3500 - (Date.now() - $startTime), 0);
         }
 
         function drawGuide($guideId) {
@@ -296,16 +303,16 @@
             var $result = '';
             switch ($goal) {
                 case 1:
-                    $result = `<span class="flip">⬅⬅⬅⬅⬅</span>`;
+                    $result = `<span class="flip">🐟🐟🐟🐟🐟</span>`;
                     break;
                 case 2:
-                    $result = `<span>⬅⬅⬅⬅⬅</span>`;
+                    $result = `<span>🐟🐟🐟🐟🐟</span>`;
                     break;
                 case 3:
-                    $result = `<span class="flip">⬅⬅</span><span>⬅</span><span class="flip">⬅⬅</span>`;
+                    $result = `<span class="flip">🐟🐟</span><span>🐟</span><span class="flip">🐟🐟</span>`;
                     break;
                 case 4:
-                    $result = `<span>⬅⬅</span><span class="flip">⬅</span><span>⬅⬅</span>`;
+                    $result = `<span>🐟🐟</span><span class="flip">🐟</span><span>🐟🐟</span>`;
                     break;
             }
 
@@ -317,6 +324,28 @@
             max = Math.floor(max);
 
             return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function hook($currentRound, $currentStep, $timeCost)
+        {
+            if ($currentStep == 1) {
+                $oneRoundCost = {};
+                $oneRoundAws = {};
+            }
+
+            $oneRoundCost[$currentStep] = $timeCost;
+
+            if ($currentStep == 5) {
+                $round = $roundList[$currentRound - 1];
+                $submitData.push({
+                    'round': $currentRound,
+                    'guideId': $round.guideId,
+                    'goalId': $round.goalId,
+                    'answer': $oneRoundAws.answer,
+                    'cost_time': $oneRoundAws.cost_time,
+                    'time_details': $oneRoundCost,
+                });
+            }
         }
     }
 </script>

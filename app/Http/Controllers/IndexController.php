@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Data;
 use App\Exports\DataExport;
 use App\Exports\DataRawExport;
-use App\Http\Requests\DataRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class IndexController extends Controller
 {
@@ -21,6 +21,14 @@ class IndexController extends Controller
 
     public function data()
     {
+        $settings = Redis::hgetall('settings');
+        $settings = [
+            't1' => $settings['t1'] ?? 100,
+            't2' => $settings['t2'] ?? 400,
+            't3' => $settings['t3'] ?? 1700,
+            'n' => $settings['n'] ?? 10,
+        ];
+
         $guideList = [
             1 => [0, 1, 0],
             2 => [0, 2, 0],
@@ -93,7 +101,7 @@ class IndexController extends Controller
         ];
 
         $roundList = [];
-        for ($i=0; $i < 10; $i++) {
+        for ($i=0; $i < $settings['n']; $i++) {
             $roundList[] = $situations;
         }
         $roundList = array_merge(...$roundList);
@@ -104,6 +112,7 @@ class IndexController extends Controller
             'goalList' => $goalList,
             'correctMap' => $correctMap,
             'roundList' => $roundList,
+            'settings' => $settings,
         ];
     }
 

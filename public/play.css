@@ -81,3 +81,8 @@ body, html {
 .weui-btn span.flip {
     transform: scale(-1, 1);
 }
+
+.btn {
+    font-size: 4em;
+    padding: 0;
+}

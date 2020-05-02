@@ -25,3 +25,6 @@ Route::get('export_raw/{start?}/{end?}', 'IndexController@exportRaw');
 Route::get('export/{start?}/{end?}', 'IndexController@export');
 
 Route::get('/result', 'IndexController@lastResult');
+
+Route::get('/settings/all', 'SettingsController@show');
+Route::get('/settings/update', 'SettingsController@update');
