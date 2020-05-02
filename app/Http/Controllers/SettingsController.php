@@ -11,7 +11,16 @@ class SettingsController extends Controller
     {
         $settings = Redis::hgetall('settings');
 
-        return $settings;
+        $settings = [
+            't1' => $settings['t1'] ?? 100,
+            't2' => $settings['t2'] ?? 400,
+            't3' => $settings['t3'] ?? 1700,
+            'n' => $settings['n'] ?? 10,
+        ];
+
+        echo '<pre>';
+        echo json_encode($settings, JSON_PRETTY_PRINT);
+        echo '</pre>';
     }
 
     public function update(Request $request)
@@ -24,6 +33,8 @@ class SettingsController extends Controller
         ];
         Redis::hmset('settings', $settings);
 
-        return $settings;
+        echo '<pre>';
+        echo json_encode($settings, JSON_PRETTY_PRINT);
+        echo '</pre>';
     }
 }

@@ -7,7 +7,7 @@
     <title>教育研究调查</title>
 
     <link rel="stylesheet" href="/weui.css"/>
-    <link rel="stylesheet" href="/play.css?v5"/>
+    <link rel="stylesheet" href="/play.css?v6"/>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
