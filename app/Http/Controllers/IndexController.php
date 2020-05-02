@@ -107,6 +107,8 @@ class IndexController extends Controller
         $roundList = array_merge(...$roundList);
         shuffle($roundList);
 
+        // $roundList = array_slice($roundList, 0, 5);
+
         return [
             'guideList' => $guideList,
             'goalList' => $goalList,
