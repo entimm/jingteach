@@ -32,6 +32,24 @@
                             </div>
                         </div>
                         <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+                            <div class="weui-cell__bd">
+                                <input id="input_name" class="weui-input" placeholder="填写你的姓名"/>
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">年级</label></div>
+                            <div class="weui-cell__bd">
+                                <input id="input_grade" class="weui-input" placeholder="填写你的年级"/>
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">年龄</label></div>
+                            <div class="weui-cell__bd">
+                                <input id="input_age" class="weui-input" placeholder="填写你的年龄"/>
+                            </div>
+                        </div>
+                        <div class="weui-cell">
                             <div class="weui-cell__hd"><label class="weui-label">学号</label></div>
                             <div class="weui-cell__bd">
                                 <input id="input_student_no" class="weui-input" placeholder="填写你的学号"/>
@@ -71,6 +89,9 @@
         $('#showTooltips').on('click', function () {
             var $school = $('#input_school').val();
             var $class = $('#input_class').val();
+            var $name = $('#input_name').val();
+            var $grade = $('#input_grade').val();
+            var $age = $('#input_age').val();
             var $studentNo = $('#input_student_no').val();
 
             if ($(this).hasClass('weui-btn_disabled')) return;
@@ -79,7 +100,7 @@
             setTimeout(function () {
                 $(that).removeClass('weui-btn_disabled');
             }, 2000);
-            $.post('/login', {school:$school, class:$class, student_no:$studentNo}, function (response) {
+            $.post('/login', {school:$school, class:$class, name:$name, grade:$grade, age:$age, student_no:$studentNo}, function (response) {
                 if (response.code) {
                     $toastFail.fadeIn(100);
                     setTimeout(function () {

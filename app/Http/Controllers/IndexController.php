@@ -123,6 +123,9 @@ class IndexController extends Controller
         $data = [
             'school' => session('school'),
             'class' => session('class'),
+            'name' => session('name'),
+            'grade' => session('grade'),
+            'age' => session('age'),
             'student_no' => session('student_no'),
             'user_agent' => $request->userAgent(),
             'ip' => $request->ip(),
