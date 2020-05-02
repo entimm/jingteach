@@ -20,6 +20,9 @@ class UserController extends Controller
     {
         session(['school' => $request->school]);
         session(['class' => $request->class]);
+        session(['name' => $request->name]);
+        session(['grade' => $request->grade]);
+        session(['age' => $request->age]);
         session(['student_no' => $request->student_no]);
     }
 
