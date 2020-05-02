@@ -283,7 +283,7 @@
             // console.log('t1='+$d1Time+' t2='+$RTTime+' t3='+(3500 - $RTTime - $d1Time - 500));
 
             // 3500 - $RTTime - $d1Time - 500
-            return Math.max(3500 - (Date.now() - $startTime), 0);
+            return 3500 - $RTTime;
         }
 
         function drawGuide($guideId) {
