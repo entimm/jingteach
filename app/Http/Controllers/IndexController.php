@@ -19,7 +19,7 @@ class IndexController extends Controller
         return view('index');
     }
 
-    public function data()
+    public function data(Request $request)
     {
         $settings = Redis::hgetall('settings');
         $settings = [

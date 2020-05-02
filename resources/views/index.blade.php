@@ -122,12 +122,12 @@
         $('#left').click(function(event) {
             if (4 != $currentStep) return;
             // console.log('你点击了右,$currentRound='+$currentRound+'$currentStep='+$currentStep);
-            action($currentRound, 1, $RTTime);
+            action($currentRound, 1);
         });
         $('#right').click(function(event) {
             if (4 != $currentStep) return;
             // console.log('你点击了左,$currentRound='+$currentRound+'$currentStep='+$currentStep);
-            action($currentRound, 2, $RTTime);
+            action($currentRound, 2);
         });
 
         function enabled() {
@@ -140,14 +140,15 @@
             $('#right').addClass('weui-btn_disabled');
         }
 
-        function action($currentRound, $answer, $costTime) {
-            $oneRoundAws = {
-                'answer': $answer,
-                'cost_time': $costTime,
-            };
-            hook($currentRound, 4, $costTime ? $costTime : $settings.t3);
+        function action($currentRound, $answer) {
             $RTEnd = Date.now();
             $RTTime = $RTEnd - $RTStart;
+
+            $oneRoundAws = {
+                'answer': $answer,
+                'cost_time': $RTTime,
+            };
+            hook($currentRound, 4, $RTTime);
 
             disable();
             play();
@@ -219,7 +220,7 @@
             if (4 == $currentStep) {
                 setTimeout(function() {
                     if (!$RTEnd) {
-                        action($currentRound, 0, 0);
+                        action($currentRound, 0);
                     }
                 }, $settings.t3);
             } else {
