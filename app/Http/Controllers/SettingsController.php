@@ -16,6 +16,7 @@ class SettingsController extends Controller
             't2' => $settings['t2'] ?? 400,
             't3' => $settings['t3'] ?? 1700,
             'n' => $settings['n'] ?? 10,
+            'nn' => $settings['nn'] ?? 0,
         ];
 
         echo '<pre>';
@@ -30,6 +31,7 @@ class SettingsController extends Controller
             't2' => $request->input('t2', 400),
             't3' => $request->input('t3', 1700),
             'n' => $request->input('n', 10),
+            'nn' => $settings['nn'] ?? 0,
         ];
         Redis::hmset('settings', $settings);
 
