@@ -28,7 +28,7 @@ class SettingsController extends Controller
     public function update(Request $request)
     {
         $settings = array_filter(Arr::only($request->all(), ['t1', 't2', 't3', 'n', 'nn']), function ($item) {
-            return $item === null;
+            return $item !== null;
         });
         $settings = array_merge(Redis::hgetall('settings'), $settings);
         $settings = [
