@@ -19,7 +19,7 @@ class AddDataTable extends Migration
             $table->string('class');
             $table->string('student_no');
             $table->string('ip');
-            $table->string('user_agent');
+            $table->string('user_agent', 511);
             $table->json('data');
             $table->timestamps();
         });
