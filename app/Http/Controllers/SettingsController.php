@@ -20,9 +20,7 @@ class SettingsController extends Controller
             'nn' => $settings['nn'] ?? 0,
         ];
 
-        echo '<pre>';
-        echo json_encode($settings, JSON_PRETTY_PRINT);
-        echo '</pre>';
+        return view('settings', ['settings' => $settings]);
     }
 
     public function update(Request $request)
@@ -41,8 +39,6 @@ class SettingsController extends Controller
 
         Redis::hmset('settings', $settings);
 
-        echo '<pre>';
-        echo json_encode($settings, JSON_PRETTY_PRINT);
-        echo '</pre>';
+        return view('settings', ['settings' => $settings]);
     }
 }
