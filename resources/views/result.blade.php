@@ -35,13 +35,18 @@
 
     <br>
 
-    <ul class="list-unstyled">
-        <li>学校：{{$result['school']}}</li>
-        <li>班级：{{$result['class']}}</li>
-        <li>学号：{{$result['student_no']}}</li>
-        <li>ip: {{$result['ip']}}</li>
-        <li>时间：{{$result['created_at']}}</li>
-    </ul>
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        我的信息
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">学校：{{$result['school']}}</li>
+        <li class="list-group-item">班级：{{$result['class']}}</li>
+        <li class="list-group-item">学号：{{$result['student_no']}}</li>
+        <li class="list-group-item">ip: {{$result['ip']}}</li>
+        <li class="list-group-item">时间：{{$result['created_at']}}</li>
+      </ul>
+    </div>
 </div>
 </body>
 </html>

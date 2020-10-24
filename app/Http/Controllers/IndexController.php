@@ -140,9 +140,9 @@ class IndexController extends Controller
         session(['last_id' => $result->id]);
     }
 
-    public function lastResult()
+    public function lastResult(Request $request)
     {
-        $result = Data::where('id', session('last_id'))->first();
+        $result = Data::where('id', $request->id ?? session('last_id'))->first();
 
         if (!$result) return;
 
