@@ -15,7 +15,7 @@ Route::get('/', 'IndexController@index');
 Route::get('/data', 'IndexController@data');
 Route::post('/submit', 'IndexController@submit');
 
-Route::view('/success', 'success');
+Route::get('/success', 'IndexController@success');
 
 Route::get('/login/{code?}', 'UserController@loginView');
 Route::post('/login', 'UserController@login');

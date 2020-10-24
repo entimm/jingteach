@@ -172,4 +172,20 @@ class IndexController extends Controller
 
         return (new DataExport($filter))->download('data.xlsx');
     }
+
+    public function success(Request $request)
+    {
+        $count = Data::where([
+            'name' => session('name'),
+            'class' => session('class'),
+            'student_no' => session('student_no'),
+            'grade' => session('grade'),
+            'school' => session('school'),
+        ])->count();
+
+        return view('success', [
+            'name' => session('name'),
+            'count' => $count,
+        ]);
+    }
 }

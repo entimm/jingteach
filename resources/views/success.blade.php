@@ -23,6 +23,9 @@
                 <h2 class="weui-msg__title">GAME OVER</h2>
                 <p class="weui-msg__desc">感谢您的配合</p>
             </div>
+            <div class="weui-msg__text-area">
+                <p class="weui-msg__desc"><i>{{$name}}</i> 已经完成 <i>{{$count}}次</i> 测试</p>
+            </div>
             <div class="weui-msg__opr-area">
                 <p class="weui-btn-area">
                     <a href="/" class="weui-btn weui-btn_primary">再玩一次</a>
@@ -35,7 +38,7 @@
 
             <div class="weui-msg__extra-area">
                 <div class="weui-footer">
-                    <p class="weui-footer__text">Copyright © 2016-2019 高校教育</p>
+                    <p class="weui-footer__text">Copyright © 2019-2020</p>
                 </div>
             </div>
         </div>
