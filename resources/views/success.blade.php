@@ -23,12 +23,19 @@
                 <h2 class="weui-msg__title">GAME OVER</h2>
                 <p class="weui-msg__desc">感谢您的配合</p>
             </div>
-            <div class="weui-msg__text-area">
-                <p class="weui-msg__desc"><i>{{$name}}</i> 已经完成 <i>{{$count}}次</i> 测试</p>
-            </div>
+            @if(session('student_no'))
+                <div class="weui-msg__text-area">
+                    <p class="weui-msg__desc"><i>{{$name}}</i> 已经完成 <i>{{$count}}次</i> 测试</p>
+                </div>
+            @endif
             <div class="weui-msg__opr-area">
                 <p class="weui-btn-area">
-                    <a href="/" class="weui-btn weui-btn_primary">再玩一次</a>
+                    @if(session('student_no'))
+                        <a href="/" class="weui-btn weui-btn_primary">再玩一次</a>
+                    @else
+                        <a href="/quick_play" class="weui-btn weui-btn_primary">再玩一次</a>
+                    @endif
+
                     <a href="/quit" class="weui-btn weui-btn_default">退出</a>
                     @if (session('admin'))
                         <a href="/result" class="weui-btn weui-btn_default">查看结果</a>

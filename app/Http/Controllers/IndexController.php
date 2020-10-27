@@ -19,6 +19,11 @@ class IndexController extends Controller
         return view('index');
     }
 
+    public function quickPlay(Request $request)
+    {
+        return view('index');
+    }
+
     public function data(Request $request)
     {
         $settings = Redis::hgetall('settings');
@@ -124,12 +129,12 @@ class IndexController extends Controller
     public function submit(Request $request)
     {
         $data = [
-            'school' => session('school'),
-            'class' => session('class'),
-            'name' => session('name'),
-            'grade' => session('grade'),
-            'age' => session('age'),
-            'student_no' => session('student_no'),
+            'school' => session('school', ''),
+            'class' => session('class', ''),
+            'name' => session('name', 'quick_test'),
+            'grade' => session('grade', ''),
+            'age' => session('age', 0),
+            'student_no' => session('student_no', ''),
             'user_agent' => $request->userAgent(),
             'ip' => $request->ip(),
             'data' => $request->all(),
@@ -175,13 +180,16 @@ class IndexController extends Controller
 
     public function success(Request $request)
     {
-        $count = Data::where([
-            'name' => session('name'),
-            'class' => session('class'),
-            'student_no' => session('student_no'),
-            'grade' => session('grade'),
-            'school' => session('school'),
-        ])->count();
+        $count = 0;
+        if (session('student_no')) {
+            $count = Data::where([
+                'name' => session('name'),
+                'class' => session('class'),
+                'student_no' => session('student_no'),
+                'grade' => session('grade'),
+                'school' => session('school'),
+            ])->count();
+        }
 
         return view('success', [
             'name' => session('name'),
