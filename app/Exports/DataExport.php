@@ -20,6 +20,7 @@ class DataExport implements FromArray, WithHeadings
 
     public function array(): array
     {
+        $counter = [];
         $list = Data::when($this->filter['start'], function ($query, $start) {
             return $query->where('created_at', '>=', $start.' 00:00:00');
         })->when($this->filter['end'], function ($query, $end) {
@@ -28,9 +29,19 @@ class DataExport implements FromArray, WithHeadings
 
         $result = [];
         foreach ($list as $item) {
+            $key = md5(implode('::', [
+                $item->school,
+                $item->class,
+                $item->name,
+                $item->grade,
+                $item->age,
+                $item->student_no,
+            ]));
+            $counter[$key] = isset($counter[$key]) ? ++$counter[$key] : 1;
             foreach ($item->data as $one) {
                 $result[] = [
                     'id' => $item->id,
+                    'times' => $counter[$key],
                     'school' => $item->school,
                     'class' => $item->class,
                     'name' => $item->name,
@@ -64,6 +75,7 @@ class DataExport implements FromArray, WithHeadings
     {
         return [
             '#',
+            '次数',
             '学校',
             '班级',
             '姓名',
