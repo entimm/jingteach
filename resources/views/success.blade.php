@@ -26,6 +26,7 @@
             @if(session('student_no'))
                 <div class="weui-msg__text-area">
                     <p class="weui-msg__desc"><i>{{$name}}</i> 已经完成 <i>{{$count}}次</i> 测试</p>
+                    <p class="weui-msg__desc" style="font-size: 0.9em">一定要记得将该界面进行屏幕截图哦</p>
                 </div>
             @endif
             <div class="weui-msg__opr-area">
