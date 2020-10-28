@@ -121,12 +121,12 @@
 
         $('#left').click(function(event) {
             if (4 != $currentStep) return;
-            // console.log('你点击了右,$currentRound='+$currentRound+'$currentStep='+$currentStep);
+            // console.log('你点击了左,$currentRound='+$currentRound+'$currentStep='+$currentStep);
             action($currentRound, 1);
         });
         $('#right').click(function(event) {
             if (4 != $currentStep) return;
-            // console.log('你点击了左,$currentRound='+$currentRound+'$currentStep='+$currentStep);
+            // console.log('你点击了右,$currentRound='+$currentRound+'$currentStep='+$currentStep);
             action($currentRound, 2);
         });
 

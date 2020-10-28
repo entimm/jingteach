@@ -35,28 +35,36 @@ class IndexController extends Controller
             'nn' => $settings['nn'] ?? 0,
         ];
 
+        /**
+         * 位置：(上、中、下)
+         * 形态：(0：空白、1：+、2：*)
+         */
         $guideList = [
-            1 => [0, 1, 0],
-            2 => [0, 2, 0],
-            3 => [2, 1, 2],
-            4 => [2, 1, 0],
-            5 => [0, 1, 2],
+            1 => [0, 1, 0], // 无线索
+            2 => [0, 2, 0], // 中央线索
+            3 => [2, 1, 2], // 双线索
+
+            4 => [2, 1, 0], // 空间线索-上
+            5 => [0, 1, 2], // 空间线索-下
         ];
         $goalList = [
-            1 => [0, 1],
-            2 => [1, 1],
-            3 => [0, 2],
-            4 => [1, 2],
-            5 => [0, 3],
-            6 => [1, 3],
-            7 => [0, 4],
-            8 => [1, 4],
+            1 => [0, 1], // 上-右-一致
+            2 => [1, 1], // 下-右-一致
+
+            3 => [0, 2], // 上-左-一致
+            4 => [1, 2], // 下-左-一致
+
+            5 => [0, 3], // 上-左-不一致
+            6 => [1, 3], // 下-左-不一致
+
+            7 => [0, 4], // 上-右-不一致
+            8 => [1, 4], // 下-右-不一致
         ];
         $correctMap = [
-            1 => 2,
-            2 => 1,
-            3 => 1,
-            4 => 2,
+            1 => 2, // 右
+            2 => 1, // 左
+            3 => 1, // 左
+            4 => 2, // 右
         ];
 
         $situations = [
@@ -69,6 +77,17 @@ class IndexController extends Controller
             ['guideId' => 1, 'goalId' => 7],
             ['guideId' => 1, 'goalId' => 8],
 
+            ['guideId' => 1, 'goalId' => 1],
+            ['guideId' => 1, 'goalId' => 2],
+            ['guideId' => 1, 'goalId' => 3],
+            ['guideId' => 1, 'goalId' => 4],
+            ['guideId' => 1, 'goalId' => 5],
+            ['guideId' => 1, 'goalId' => 6],
+            ['guideId' => 1, 'goalId' => 7],
+            ['guideId' => 1, 'goalId' => 8],
+
+            ////////////////////////////////
+
             ['guideId' => 2, 'goalId' => 1],
             ['guideId' => 2, 'goalId' => 2],
             ['guideId' => 2, 'goalId' => 3],
@@ -78,6 +97,17 @@ class IndexController extends Controller
             ['guideId' => 2, 'goalId' => 7],
             ['guideId' => 2, 'goalId' => 8],
 
+            ['guideId' => 2, 'goalId' => 1],
+            ['guideId' => 2, 'goalId' => 2],
+            ['guideId' => 2, 'goalId' => 3],
+            ['guideId' => 2, 'goalId' => 4],
+            ['guideId' => 2, 'goalId' => 5],
+            ['guideId' => 2, 'goalId' => 6],
+            ['guideId' => 2, 'goalId' => 7],
+            ['guideId' => 2, 'goalId' => 8],
+
+            ////////////////////////////////
+
             ['guideId' => 3, 'goalId' => 1],
             ['guideId' => 3, 'goalId' => 2],
             ['guideId' => 3, 'goalId' => 3],
@@ -86,6 +116,17 @@ class IndexController extends Controller
             ['guideId' => 3, 'goalId' => 6],
             ['guideId' => 3, 'goalId' => 7],
             ['guideId' => 3, 'goalId' => 8],
+
+            ['guideId' => 3, 'goalId' => 1],
+            ['guideId' => 3, 'goalId' => 2],
+            ['guideId' => 3, 'goalId' => 3],
+            ['guideId' => 3, 'goalId' => 4],
+            ['guideId' => 3, 'goalId' => 5],
+            ['guideId' => 3, 'goalId' => 6],
+            ['guideId' => 3, 'goalId' => 7],
+            ['guideId' => 3, 'goalId' => 8],
+
+            ////////////////////////////////
 
             ['guideId' => 4, 'goalId' => 1],
             ['guideId' => 4, 'goalId' => 1],
