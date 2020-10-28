@@ -18,7 +18,29 @@
             </div>
             <div class="weui-form__control-area">
                 <div class="weui-cells__group weui-cells__group_form">
+                    @if ($history_login)
+                    <div class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd">
+                            <label for="" class="weui-label">快速登录</label>
+                        </div>
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" id="quick-login">
+                                <option value="">请选择</option>
+                                @foreach ($history_login as $item)
+                                    <option value="{{$loop->index}}">{{$item['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    @endif
+
                     <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+                            <div class="weui-cell__bd">
+                                <input id="input_name" class="weui-input" placeholder="填写你的姓名"/>
+                            </div>
+                        </div>
                         <div class="weui-cell">
                             <div class="weui-cell__hd"><label class="weui-label">学校</label></div>
                             <div class="weui-cell__bd">
@@ -29,12 +51,6 @@
                             <div class="weui-cell__hd"><label class="weui-label">班级</label></div>
                             <div class="weui-cell__bd">
                                 <input id="input_class" class="weui-input" placeholder="填写你的班级"/>
-                            </div>
-                        </div>
-                        <div class="weui-cell">
-                            <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
-                            <div class="weui-cell__bd">
-                                <input id="input_name" class="weui-input" placeholder="填写你的姓名"/>
                             </div>
                         </div>
                         <div class="weui-cell">
@@ -82,6 +98,7 @@
 
 <script src="/zepto.min.js"></script>
 <script type="text/javascript">
+    var historyLogin = {!!json_encode($history_login)!!}
     $(function () {
         var $toastSuccess = $('#js_toast_success');
         var $toastFail = $('#js_toast_fail');
@@ -111,6 +128,19 @@
 
                 window.location.href = '/';
             });
+        });
+        $('#quick-login').on('change', function () {
+            var index = $(this).val();
+            if (index !== '') {
+                var loginInfo = historyLogin[index];
+                $('#input_school').val(loginInfo.school);
+                $('#input_class').val(loginInfo.class);
+                $('#input_name').val(loginInfo.name);
+                $('#input_grade').val(loginInfo.grade);
+                $('#input_age').val(loginInfo.age);
+                $('#input_student_no').val(loginInfo.student_no);
+            }
+            
         });
     });
 </script>

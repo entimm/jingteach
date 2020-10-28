@@ -8,13 +8,18 @@ use Illuminate\Support\Facades\Redis;
 
 class UserController extends Controller
 {
-    public function loginView($code = 0)
+    public function loginView(Request $request, $code = 0)
     {
+        $key = md5($request->userAgent().'||'.$request->ip());
+        $historyLogin = array_map(function ($item) {
+            $item = json_decode($item, true);
+            return $item;
+        }, Redis::smembers($key));
         if (88 == $code) {
             session(['admin' => 1]);
         }
 
-        return view('login');
+        return view('login', ['history_login' => $historyLogin]);
     }
 
     public function login(LoginRequest $request)
