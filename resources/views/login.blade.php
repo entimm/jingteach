@@ -25,7 +25,7 @@
                         </div>
                         <div class="weui-cell__bd">
                             <select class="weui-select" id="quick-login">
-                                <option value="">请选择</option>
+                                <option value="">请选择账号</option>
                                 @foreach ($history_login as $item)
                                     <option value="{{$loop->index}}">{{$item['name']}}</option>
                                 @endforeach
