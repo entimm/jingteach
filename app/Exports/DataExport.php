@@ -38,6 +38,30 @@ class DataExport implements FromArray, WithHeadings
                 $item->student_no,
             ]));
             $counter[$key] = isset($counter[$key]) ? ++$counter[$key] : 1;
+            $guideNameMap = [
+                1 => '无线索',
+                2 => '中央线索',
+                3 => '双线索',
+                4 => '空间线索-上',
+                5 => '空间线索-下',
+            ];
+            $goalNameMap = [
+                1 => '上-右-一致',
+                2 => '下-右-一致',
+
+                3 => '上-左-一致',
+                4 => '下-左-一致',
+
+                5 => '上-左-不一致',
+                6 => '下-左-不一致',
+
+                7 => '上-右-不一致',
+                8 => '下-右-不一致',
+            ];
+            $answeerMap = [
+                1 => '左',
+                2 => '右',
+            ];
             foreach ($item->data as $one) {
                 $result[] = [
                     'id' => $item->id,
@@ -50,9 +74,9 @@ class DataExport implements FromArray, WithHeadings
                     'student_no' => $item->student_no,
                     'ip' => $item->ip,
                     'round' => $one['round'],
-                    'guideId' => $one['guideId'],
-                    'goalId' => $one['goalId'],
-                    'answer' => $one['answer'],
+                    'guideId' => $guideNameMap[$one['guideId']] ?? '',
+                    'goalId' => $goalNameMap[$one['goalId']] ?? '',
+                    'answer' => $answeerMap[$one['answer']] ?? '',
                     'cost_time' => $one['cost_time'],
                     'time_cost1' => $one['time_details'][1],
                     'time_cost2' => $one['time_details'][2],
