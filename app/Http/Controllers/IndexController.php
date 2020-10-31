@@ -32,7 +32,7 @@ class IndexController extends Controller
             't2' => $settings['t2'] ?? 400,
             't3' => $settings['t3'] ?? 1700,
             'n' => $settings['n'] ?? 10,
-            'nn' => $settings['nn'] ?? 0,
+            // 'nn' => $settings['nn'] ?? 0,
         ];
 
         /**
@@ -154,7 +154,7 @@ class IndexController extends Controller
         $roundList = array_merge(...$roundList);
         shuffle($roundList);
 
-        if ($settings['nn']) {
+        if (!empty($settings['nn'])) {
             $roundList = array_slice($roundList, 0, min($settings['nn'], $settings['n'] * 40));
         }
 

@@ -17,7 +17,7 @@ class SettingsController extends Controller
             't2' => $settings['t2'] ?? 400,
             't3' => $settings['t3'] ?? 1700,
             'n' => $settings['n'] ?? 10,
-            'nn' => $settings['nn'] ?? 0,
+            // 'nn' => $settings['nn'] ?? 0,
         ];
 
         return view('settings', ['settings' => $settings]);
@@ -34,7 +34,7 @@ class SettingsController extends Controller
             't2' => $settings['t2'] ?? 400,
             't3' => $settings['t3'] ?? 1700,
             'n' => $settings['n'] ?? 10,
-            'nn' => $settings['nn'] ?? 0,
+            // 'nn' => $settings['nn'] ?? 0,
         ];
 
         Redis::hmset('settings', $settings);
