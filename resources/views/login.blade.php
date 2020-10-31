@@ -8,6 +8,13 @@
 
     <!-- 引入 WeUI -->
     <link rel="stylesheet" href="/weui.css"/>
+    <link href="https://cdn.bootcdn.net/ajax/libs/select2/4.0.9/css/select2.css" rel="stylesheet">
+    <style>
+        .weui-cell_select .weui-cell__bd:after {
+            width: 0;
+            height: 0;
+        }
+    </style>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
@@ -24,7 +31,7 @@
                             <label for="" class="weui-label">快速登录</label>
                         </div>
                         <div class="weui-cell__bd">
-                            <select class="weui-select" id="quick-login">
+                            <select style="width: 90%" id="quick-login">
                                 <option value="">请选择账号</option>
                                 @foreach ($history_login as $item)
                                     <option value="{{$loop->index}}">{{$item['name']}}</option>
@@ -96,8 +103,12 @@
     </div>
 </div>
 
-<script src="/zepto.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/select2/4.0.9/js/i18n/zh-CN.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
+
 <script type="text/javascript">
+    $('#quick-login').select2();
     var historyLogin = {!!json_encode($history_login)!!}
     $(function () {
         var $toastSuccess = $('#js_toast_success');
