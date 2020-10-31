@@ -129,22 +129,22 @@ class IndexController extends Controller
             ////////////////////////////////
 
             ['guideId' => 4, 'goalId' => 1],
-            // ['guideId' => 4, 'goalId' => 1],
+            ['guideId' => 4, 'goalId' => 1],
             ['guideId' => 4, 'goalId' => 3],
-            // ['guideId' => 4, 'goalId' => 3],
+            ['guideId' => 4, 'goalId' => 3],
             ['guideId' => 4, 'goalId' => 5],
-            // ['guideId' => 4, 'goalId' => 5],
+            ['guideId' => 4, 'goalId' => 5],
             ['guideId' => 4, 'goalId' => 7],
-            // ['guideId' => 4, 'goalId' => 7],
+            ['guideId' => 4, 'goalId' => 7],
 
             ['guideId' => 5, 'goalId' => 2],
-            // ['guideId' => 5, 'goalId' => 2],
+            ['guideId' => 5, 'goalId' => 2],
             ['guideId' => 5, 'goalId' => 4],
-            // ['guideId' => 5, 'goalId' => 4],
+            ['guideId' => 5, 'goalId' => 4],
             ['guideId' => 5, 'goalId' => 6],
-            // ['guideId' => 5, 'goalId' => 6],
+            ['guideId' => 5, 'goalId' => 6],
             ['guideId' => 5, 'goalId' => 8],
-            // ['guideId' => 5, 'goalId' => 8],
+            ['guideId' => 5, 'goalId' => 8],
         ];
 
         $roundList = [];
