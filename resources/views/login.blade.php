@@ -104,11 +104,14 @@
 </div>
 
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/select2/4.0.9/js/i18n/zh-CN.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/select2/4.0.9/js/i18n/zh-CN.js"></script>
 
 <script type="text/javascript">
-    $('#quick-login').select2();
+
+    $('#quick-login').select2({
+      language: "zh-CN"
+    });
     var historyLogin = {!!json_encode($history_login)!!}
     $(function () {
         var $toastSuccess = $('#js_toast_success');
