@@ -46,6 +46,13 @@ class UserController extends Controller
 
     public function all()
     {
-        return Redis::keys('*');
+        $result = [];
+
+        $keys = Redis::keys('*');
+        foreach ($keys as $key) {
+            $result[$key] = Redis::smembers($key);
+        }
+
+        return $result;
     }
 }
