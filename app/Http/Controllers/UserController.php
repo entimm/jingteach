@@ -43,4 +43,9 @@ class UserController extends Controller
 
         return response()->redirectTo('/login');
     }
+
+    public function all()
+    {
+        return Redis::keys('*');
+    }
 }

@@ -29,3 +29,5 @@ Route::get('/result/{id?}', 'IndexController@lastResult');
 
 Route::get('/settings/all', 'SettingsController@show');
 Route::get('/settings/update', 'SettingsController@update');
+
+Route::get('/user/all', 'UserController@all');
