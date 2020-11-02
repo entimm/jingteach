@@ -50,6 +50,7 @@ class UserController extends Controller
 
         $keys = Redis::keys('*');
         foreach ($keys as $key) {
+            $key = substr($key, strlen(config('app.name').'_database_'));
             $result[$key] = Redis::smembers($key);
         }
 
