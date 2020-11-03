@@ -60,14 +60,20 @@ class UserController extends Controller
 
     public function all()
     {
-        $result = [];
+
+        $loginList = [];
 
         $keys = Redis::keys('*');
         foreach ($keys as $key) {
             $key = substr($key, strlen(config('app.name').'_database_'));
-            $result[$key] = Redis::smembers($key);
+            if (strlen($key) == 32) {
+                $loginList[$key] = Redis::smembers($key);
+            }
         }
 
-        return $result;
+        return [
+            'loginList' => $loginList,
+            'skey_list' => Redis::hgetall('skey_list'),
+        ];
     }
 }
