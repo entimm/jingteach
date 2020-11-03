@@ -13,8 +13,8 @@ class UserController extends Controller
         $skey = session('skey');
         if (!$skey) {
             $skey = md5($request->userAgent().'||'.$request->ip());
-            dump($skey);
             session(['skey' => $skey]);
+            Redis::hmset('skey_list', $skey, $request->userAgent().'||'.$request->ip());
         }
 
         $historyLogin = array_map(function ($item) {
