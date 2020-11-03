@@ -10,11 +10,17 @@ class UserController extends Controller
 {
     public function loginView(Request $request, $code = 0)
     {
-        $key = md5($request->userAgent().'||'.$request->ip());
+        $skey = session('skey');
+        if (!$skey) {
+            $skey = md5($request->userAgent().'||'.$request->ip());
+            dump($skey);
+            session(['skey' => $skey]);
+        }
+
         $historyLogin = array_map(function ($item) {
             $item = json_decode($item, true);
             return $item;
-        }, Redis::smembers($key));
+        }, Redis::smembers($skey));
         if (88 == $code) {
             session(['admin' => 1]);
         }
@@ -39,7 +45,15 @@ class UserController extends Controller
 
     public function quit(Request $request)
     {
-        $request->session()->flush();
+        // $request->session()->flush();
+        session([
+            'school' => null,
+            'class' => null,
+            'name' => null,
+            'grade' => null,
+            'age' => null,
+            'student_no' => null,
+        ]);
 
         return response()->redirectTo('/login');
     }
