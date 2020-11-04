@@ -208,11 +208,10 @@
                     break;
                 case 4:
                     // console.log($round);
-                    $RTStart = Date.now();
-                    $RTEnd = 0;
                     $timeOut = step4($goalList[$round.goalId]);
                     enabled();
-
+                    $RTStart = Date.now();
+                    $RTEnd = 0;
                     break;
                 case 5:
                     $timeOut = step5();
