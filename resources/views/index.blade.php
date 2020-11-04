@@ -142,7 +142,11 @@
 
         function action($currentRound, $answer) {
             $RTEnd = Date.now();
-            $RTTime = $RTEnd - $RTStart;
+            if ($answer) {
+                $RTTime = $RTEnd - $RTStart;
+            } else {
+                $RTTime = $settings.t3
+            }
 
             $oneRoundAws = {
                 'answer': $answer,
@@ -338,14 +342,16 @@
 
             if ($currentStep == 5) {
                 $round = $roundList[$currentRound - 1];
-                $submitData.push({
+                var submitItem = {
                     'round': $currentRound,
                     'guideId': $round.guideId,
                     'goalId': $round.goalId,
                     'answer': $oneRoundAws.answer,
                     'cost_time': $oneRoundAws.cost_time,
                     'time_details': $oneRoundCost,
-                });
+                };
+                console.log(submitItem);
+                $submitData.push(submitItem);
             }
         }
     }
