@@ -157,10 +157,8 @@
                 'answer': $answer,
                 'cost_time': $RTTime,
             };
-            hook($currentRound, 4, $RTTime);
 
             disable();
-            play();
 
             $round = $roundList[$currentRound - 1];
             if ($answer == $correctMap[$goalList[$round.goalId][1]]) {
@@ -172,6 +170,10 @@
                 // console.log('错！');
                 $audioBad.play();
             }
+
+            hook($currentRound, 4, $RTTime);
+
+            play();
         }
 
         function gameover() {
@@ -354,7 +356,7 @@
                     'time_details': $oneRoundCost,
                 };
                 console.log(submitItem);
-
+console.log($oneRoundAws)
                 if ($oneRoundAws.is_ok) {
                     $submitData.push(submitItem);
                 } else {
