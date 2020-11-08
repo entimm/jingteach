@@ -63,6 +63,7 @@ class DataExport implements FromArray, WithHeadings
                 2 => '右',
             ];
             foreach ($item->data as $one) {
+                $rightAnswer = in_array($one['goalId'], [3, 4, 5, 6]) ? 1 : 2;
                 $result[] = [
                     'id' => $item->id,
                     'times' => $counter[$key],
@@ -83,6 +84,8 @@ class DataExport implements FromArray, WithHeadings
                     'time_cost3' => $one['time_details'][3],
                     'time_cost4' => $one['time_details'][4],
                     'time_cost5' => $one['time_details'][5],
+                    'is_right' => $rightAnswer == $one['answer'] ? '对' : '错',
+                    'is_consistent' => $one['goalId'] <= 4 ? '是' : '否',
                     'created_at' => $item->created_at,
                     'updated_at' => $item->updated_at,
             ];
@@ -117,6 +120,8 @@ class DataExport implements FromArray, WithHeadings
             '步骤3',
             '步骤4',
             '步骤5',
+            '对错',
+            '是否一致',
             '创建时间',
             '修改时间',
         ];
