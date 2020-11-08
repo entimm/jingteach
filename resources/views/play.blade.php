@@ -164,9 +164,11 @@
 
             $round = $roundList[$currentRound - 1];
             if ($answer == $correctMap[$goalList[$round.goalId][1]]) {
+                $oneRoundAws['is_ok'] = 1;
                 // console.log('对！');
                 $audioOk.play();
             } else {
+                $oneRoundAws['is_ok'] = 0;
                 // console.log('错！');
                 $audioBad.play();
             }
@@ -344,7 +346,7 @@
             if ($currentStep == 5) {
                 $round = $roundList[$currentRound - 1];
                 var submitItem = {
-                    'round': $currentRound,
+                    'round': $round.id,
                     'guideId': $round.guideId,
                     'goalId': $round.goalId,
                     'answer': $oneRoundAws.answer,
@@ -352,7 +354,12 @@
                     'time_details': $oneRoundCost,
                 };
                 console.log(submitItem);
-                $submitData.push(submitItem);
+
+                if ($oneRoundAws.is_ok) {
+                    $submitData.push(submitItem);
+                } else {
+                    $roundList.push($roundList[$currentRound - 1]);
+                }
             }
         }
     }

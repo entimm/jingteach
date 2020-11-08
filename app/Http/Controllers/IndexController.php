@@ -168,6 +168,12 @@ class IndexController extends Controller
             $roundList = array_slice($roundList, 0, min($settings['nn'], $settings['n'] * 40));
         }
 
+        $roundList = array_map(function ($item) {
+            static $i = 1;
+            $item['id'] = $i++;
+            return $item;
+        }, $roundList);
+
         return [
             'guideList' => $guideList,
             'goalList' => $goalList,
