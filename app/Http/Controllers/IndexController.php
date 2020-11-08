@@ -16,12 +16,21 @@ class IndexController extends Controller
             return response()->redirectTo('/login');
         }
 
-        return view('index');
+        return view('notice');
+    }
+
+    public function play(Request $request)
+    {
+        if (!session('student_no')) {
+            return response()->redirectTo('/login');
+        }
+
+        return view('play');
     }
 
     public function quickPlay(Request $request)
     {
-        return view('index');
+        return view('play');
     }
 
     public function data(Request $request)

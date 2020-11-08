@@ -8,6 +8,11 @@
 
     <link rel="stylesheet" href="/weui.css"/>
     <link rel="stylesheet" href="/play.css?v6"/>
+    <style>
+        .guide {
+            color: red;
+        }
+    </style>
 </head>
 <body ontouchstart>
 <div class="container" id="container">
@@ -287,13 +292,13 @@
         }
 
         function drawGuide($guideId) {
-            var $result = '&nbsp';
+            var $result = '<span class="guide"></span>';
             switch ($guideId) {
                 case 1:
-                    $result = '<span>✚</span>';
+                    $result = '<span class="guide">✚</span>';
                     break;
                 case 2:
-                    $result = '<span>✻</span>';
+                    $result = '<span class="guide">✻</span>';
                     break;
             }
 

@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'IndexController@index');
+Route::get('/play', 'IndexController@play');
 Route::get('/quick_play', 'IndexController@quickPlay');
 Route::get('/data', 'IndexController@data');
 Route::post('/submit', 'IndexController@submit');
