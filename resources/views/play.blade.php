@@ -358,6 +358,7 @@
                 if ($oneRoundAws.is_ok) {
                     $submitData.push(submitItem);
                 } else {
+                    console.log('repush', $roundList[$currentRound - 1]);
                     $roundList.push($roundList[$currentRound - 1]);
                 }
             }
