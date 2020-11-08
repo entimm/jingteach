@@ -15,10 +15,11 @@
         设置信息
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">步骤2停留时间(t1,默认100毫秒): {{$settings['t1']}}</li>
-        <li class="list-group-item">步骤3停留时间(t2,默认400毫秒): {{$settings['t2']}}</li>
-        <li class="list-group-item">步骤4停留时间(t3,默认1700毫秒): {{$settings['t3']}}</li>
+        <li class="list-group-item">步骤2停留时间(t_guide,默认100毫秒): {{$settings['t_guide']}}</li>
+        <li class="list-group-item">步骤3停留时间(t_interval,默认400毫秒): {{$settings['t_interval']}}</li>
+        <li class="list-group-item">步骤4停留时间(t_rt_max,默认1700毫秒): {{$settings['t_rt_max']}}</li>
         <li class="list-group-item">组数(1组40个回合): {{$settings['n']}}</li>
+        <li class="list-group-item">步骤4、5的总时间: {{$settings['t_total']}}</li>
         {{--<li class="list-group-item">回合数(默认为 组数 * 40): {{$settings['nn']}}</li>--}}
       </ul>
     </div>

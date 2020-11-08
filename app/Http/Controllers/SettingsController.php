@@ -13,10 +13,11 @@ class SettingsController extends Controller
         $settings = Redis::hgetall('settings');
 
         $settings = [
-            't1' => $settings['t1'] ?? 100,
-            't2' => $settings['t2'] ?? 400,
-            't3' => $settings['t3'] ?? 1700,
+            't_guide' => $settings['t_guide'] ?? 100,
+            't_interval' => $settings['t_interval'] ?? 400,
+            't_rt_max' => $settings['t_rt_max'] ?? 1700,
             'n' => $settings['n'] ?? 10,
+            't_total' => $settings['t_total'] ?? 3500,
             // 'nn' => $settings['nn'] ?? 0,
         ];
 
@@ -25,15 +26,16 @@ class SettingsController extends Controller
 
     public function update(Request $request)
     {
-        $settings = array_filter(Arr::only($request->all(), ['t1', 't2', 't3', 'n', 'nn']), function ($item) {
+        $settings = array_filter(Arr::only($request->all(), ['t_guide', 't_interval', 't_rt_max', 'n', 'nn']), function ($item) {
             return $item !== null;
         });
         $settings = array_merge(Redis::hgetall('settings'), $settings);
         $settings = [
-            't1' => $settings['t1'] ?? 100,
-            't2' => $settings['t2'] ?? 400,
-            't3' => $settings['t3'] ?? 1700,
+            't_guide' => $settings['t_guide'] ?? 100,
+            't_interval' => $settings['t_interval'] ?? 400,
+            't_rt_max' => $settings['t_rt_max'] ?? 1700,
             'n' => $settings['n'] ?? 10,
+            't_total' => $settings['t_total'] ?? 3500
             // 'nn' => $settings['nn'] ?? 0,
         ];
 

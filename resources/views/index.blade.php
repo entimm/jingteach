@@ -145,7 +145,7 @@
             if ($answer) {
                 $RTTime = $RTEnd - $RTStart;
             } else {
-                $RTTime = $settings.t3
+                $RTTime = $settings.t_rt_max
             }
 
             $oneRoundAws = {
@@ -225,7 +225,7 @@
                     if (!$RTEnd) {
                         action($currentRound, 0);
                     }
-                }, $settings.t3);
+                }, $settings.t_rt_max);
             } else {
                 hook($currentRound, $currentStep, $timeOut);
                 setTimeout(play, $timeOut);
@@ -250,7 +250,7 @@
             $('#pos2').html(drawGuide($guide[1]));
             $('#pos3').html(drawGuide($guide[2]));
 
-            return $settings.t1;
+            return $settings.t_guide;
         }
 
         function step3() {
@@ -258,7 +258,7 @@
             $('#pos2').html('<span>✚</span>');
             $('#pos3').html('&nbsp');
 
-            return $settings.t2;
+            return $settings.t_interval;
         }
 
         function step4($goalInfo) {
@@ -283,10 +283,7 @@
             $('#pos2').html('<span>✚</span>');
             $('#pos3').html('&nbsp');
 
-            // console.log('t1='+$d1Time+' t2='+$RTTime+' t3='+(3500 - $RTTime - $d1Time - 500));
-
-            // 3500 - $RTTime - $d1Time - 500
-            return 3500 - $RTTime;
+            return $settings.t_total - $RTTime;
         }
 
         function drawGuide($guideId) {

@@ -28,10 +28,11 @@ class IndexController extends Controller
     {
         $settings = Redis::hgetall('settings');
         $settings = [
-            't1' => $settings['t1'] ?? 100,
-            't2' => $settings['t2'] ?? 400,
-            't3' => $settings['t3'] ?? 1700,
+            't_guide' => $settings['t_guide'] ?? 100,
+            't_interval' => $settings['t_interval'] ?? 400,
+            't_rt_max' => $settings['t_rt_max'] ?? 1700,
             'n' => $settings['n'] ?? 10,
+            't_total' => $settings['t_total'] ?? 3500
             // 'nn' => $settings['nn'] ?? 0,
         ];
 
