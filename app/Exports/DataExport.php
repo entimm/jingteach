@@ -62,6 +62,10 @@ class DataExport implements FromArray, WithHeadings
                 1 => '左',
                 2 => '右',
             ];
+            $sexMap = [
+                1 => '男',
+                2 => '女',
+            ];
             foreach ($item->data as $one) {
                 $rightAnswer = in_array($one['goalId'], [3, 4, 5, 6]) ? 1 : 2;
                 $result[] = [
@@ -72,7 +76,7 @@ class DataExport implements FromArray, WithHeadings
                     'name' => $item->name,
                     'grade' => $item->grade,
                     'age' => $item->age,
-                    'sex' => $item->sex,
+                    'sex' => isset($sexMap[$item->sex]) ? $sexMap[$item->sex] : '',
                     'student_no' => $item->student_no,
                     'ip' => $item->ip,
                     'round' => $one['round'],
@@ -109,6 +113,7 @@ class DataExport implements FromArray, WithHeadings
             '姓名',
             '年级',
             '年龄',
+            '性别',
             '学号',
             'IP地址',
             '回合',
