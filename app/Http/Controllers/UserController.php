@@ -40,6 +40,14 @@ class UserController extends Controller
             'sex' => $request->sex,
             'student_no' => $request->student_no,
         ];
+        Redis::srem($key, json_encode([
+            'school' => $request->school,
+            'class' => $request->class,
+            'name' => $request->name,
+            'grade' => $request->grade,
+            'age' => $request->age,
+            'student_no' => $request->student_no,
+        ]));
         Redis::sadd($key, json_encode($data));
         session($data);
     }

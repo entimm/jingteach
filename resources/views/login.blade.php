@@ -77,7 +77,7 @@
                                 <label for="" class="weui-label">性别</label>
                             </div>
                             <div class="weui-cell__bd">
-                                <select class="weui-select" name="input_sex">
+                                <select class="weui-select" id="input_sex">
                                     <option value="0">填写你的性别</option>
                                     <option value="1">男</option>
                                     <option value="2">女</option>
