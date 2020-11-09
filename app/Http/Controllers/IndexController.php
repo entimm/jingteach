@@ -163,6 +163,7 @@ class IndexController extends Controller
         }
         $roundList = array_merge(...$roundList);
         shuffle($roundList);
+        shuffle($roundList);
 
         if (!empty($settings['nn'])) {
             $roundList = array_slice($roundList, 0, min($settings['nn'], $settings['n'] * 40));

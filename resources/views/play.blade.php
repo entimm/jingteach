@@ -299,7 +299,7 @@
             var $result = '<span class="guide"></span>';
             switch ($guideId) {
                 case 1:
-                    $result = '<span class="guide">✚</span>';
+                    $result = '<span>✚</span>';
                     break;
                 case 2:
                     $result = '<span class="guide">✻</span>';
