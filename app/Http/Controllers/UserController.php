@@ -37,6 +37,7 @@ class UserController extends Controller
             'name' => $request->name,
             'grade' => $request->grade,
             'age' => $request->age,
+            'sex' => $request->sex,
             'student_no' => $request->student_no,
         ];
         Redis::sadd($key, json_encode($data));
@@ -52,6 +53,7 @@ class UserController extends Controller
             'name' => null,
             'grade' => null,
             'age' => null,
+            'sex' => null,
             'student_no' => null,
         ]);
 

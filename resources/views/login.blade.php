@@ -72,6 +72,18 @@
                                 <input id="input_age" class="weui-input" placeholder="填写你的年龄"/>
                             </div>
                         </div>
+                        <div class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
+                            <div class="weui-cell__hd">
+                                <label for="" class="weui-label">性别</label>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <select class="weui-select" name="input_sex">
+                                    <option value="0">填写你的性别</option>
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="weui-cell">
                             <div class="weui-cell__hd"><label class="weui-label">学号</label></div>
                             <div class="weui-cell__bd">
@@ -97,7 +109,7 @@
         <div id="js_toast_fail" style="display: none;">
             <div class="weui-mask_transparent"></div>
             <div class="weui-toast">
-                <p class="weui-toast__content">请求失败</p>
+                <p class="weui-toast__content" id="toast_msg"></p>
             </div>
         </div>
     </div>
@@ -123,6 +135,7 @@
             var $name = $('#input_name').val();
             var $grade = $('#input_grade').val();
             var $age = $('#input_age').val();
+            var $sex = $('#input_sex').val();
             var $studentNo = $('#input_student_no').val();
 
             if ($(this).hasClass('weui-btn_disabled')) return;
@@ -131,8 +144,9 @@
             setTimeout(function () {
                 $(that).removeClass('weui-btn_disabled');
             }, 2000);
-            $.post('/login', {school:$school, class:$class, name:$name, grade:$grade, age:$age, student_no:$studentNo}, function (response) {
+            $.post('/login', {school:$school, class:$class, name:$name, grade:$grade, age:$age, sex:$sex, student_no:$studentNo}, function (response) {
                 if (response.code) {
+                    $('#toast_msg').html(response.msg);
                     $toastFail.fadeIn(100);
                     setTimeout(function () {
                         $toastFail.fadeOut(100);
@@ -152,6 +166,7 @@
                 $('#input_name').val(loginInfo.name);
                 $('#input_grade').val(loginInfo.grade);
                 $('#input_age').val(loginInfo.age);
+                $('#input_sex').val(loginInfo.sex);
                 $('#input_student_no').val(loginInfo.student_no);
             }
             

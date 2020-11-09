@@ -72,6 +72,7 @@ class DataExport implements FromArray, WithHeadings
                     'name' => $item->name,
                     'grade' => $item->grade,
                     'age' => $item->age,
+                    'sex' => $item->sex,
                     'student_no' => $item->student_no,
                     'ip' => $item->ip,
                     'round' => $one['round'],

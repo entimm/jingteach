@@ -193,6 +193,7 @@ class IndexController extends Controller
             'name' => session('name', 'quick_test'),
             'grade' => session('grade', ''),
             'age' => session('age', 0),
+            'sex' => session('sex', 0),
             'student_no' => session('student_no', ''),
             'user_agent' => $request->userAgent(),
             'ip' => $request->ip(),

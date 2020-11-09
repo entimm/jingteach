@@ -38,7 +38,7 @@
                 </div>
                 <div class="weui-panel__bd">
                     <div class="weui-media-box weui-media-box_text">
-                        <p class="weui-media-box__desc">3.保持中途不要来电话，来信息，不要退出。建议让手机处于wifi和飞行状态。</p>
+                        <p class="weui-media-box__desc">3.保持中途不要打接电话，不要退出程序。</p>
                     </div>
                 </div>
                 <div class="weui-panel__bd">
