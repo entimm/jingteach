@@ -25,12 +25,12 @@ class IndexController extends Controller
             return response()->redirectTo('/login');
         }
 
-        return view('play');
+        return view('play', ['quick_play' => 0]);
     }
 
     public function quickPlay(Request $request)
     {
-        return view('play');
+        return view('play', ['quick_play' => 1]);
     }
 
     public function data(Request $request)
@@ -168,7 +168,10 @@ class IndexController extends Controller
         if (!empty($settings['nn'])) {
             $roundList = array_slice($roundList, 0, min($settings['nn'], $settings['n'] * 40));
         }
-        // $roundList = array_slice($roundList, 0, 10);
+
+        if ($request->get('quick_play')) {
+            $roundList = array_slice($roundList, 0, 10);
+        }
 
         $roundList = array_map(function ($item) {
             static $i = 1;

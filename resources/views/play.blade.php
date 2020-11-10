@@ -101,9 +101,10 @@
 
     var $oneRoundCost = {};
     var $oneRoundAws = {};
+    var $quickPlay = {!! $quick_play !!};
 
     function getData() {
-        $.get('/data', function (response) {
+        $.get('/data?quick_play='+$quickPlay, function (response) {
             var $data = response;
             start($data);
         });
