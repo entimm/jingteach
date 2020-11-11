@@ -358,7 +358,7 @@
                 };
                 console.log(submitItem);
                 // console.log($oneRoundAws)
-                if (true) {
+                if (!$settings.retry || $oneRoundAws.is_ok) {
                     $submitData.push(submitItem);
                 } else {
                     console.log('repush', $roundList[$currentRound - 1]);

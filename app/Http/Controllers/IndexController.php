@@ -41,7 +41,8 @@ class IndexController extends Controller
             't_interval' => $settings['t_interval'] ?? 400,
             't_rt_max' => $settings['t_rt_max'] ?? 1700,
             'n' => $settings['n'] ?? 10,
-            't_total' => $settings['t_total'] ?? 3500
+            't_total' => $settings['t_total'] ?? 3500,
+            'retry' => $settings['retry'] ?? 0,
             // 'nn' => $settings['nn'] ?? 0,
         ];
 

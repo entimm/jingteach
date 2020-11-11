@@ -18,6 +18,7 @@ class SettingsController extends Controller
             't_rt_max' => $settings['t_rt_max'] ?? 1700,
             'n' => $settings['n'] ?? 10,
             't_total' => $settings['t_total'] ?? 3500,
+            'retry' => $settings['retry'] ?? 0,
             // 'nn' => $settings['nn'] ?? 0,
         ];
 
@@ -26,7 +27,15 @@ class SettingsController extends Controller
 
     public function update(Request $request)
     {
-        $settings = array_filter(Arr::only($request->all(), ['t_guide', 't_interval', 't_rt_max', 'n', 'nn', 't_total']), function ($item) {
+        $settings = array_filter(Arr::only($request->all(), [
+            't_guide',
+            't_interval',
+            't_rt_max',
+            'n',
+            'nn',
+            't_total',
+            'retry',
+        ]), function ($item) {
             return $item !== null;
         });
         $settings = array_merge(Redis::hgetall('settings'), $settings);
@@ -35,7 +44,8 @@ class SettingsController extends Controller
             't_interval' => $settings['t_interval'] ?? 400,
             't_rt_max' => $settings['t_rt_max'] ?? 1700,
             'n' => $settings['n'] ?? 10,
-            't_total' => $settings['t_total'] ?? 3500
+            't_total' => $settings['t_total'] ?? 3500,
+            'retry' => $settings['retry'] ?? 0,
             // 'nn' => $settings['nn'] ?? 0,
         ];
 
