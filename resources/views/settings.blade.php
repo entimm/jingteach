@@ -20,6 +20,7 @@
         <li class="list-group-item">步骤4停留时间(t_rt_max,默认1700毫秒): {{$settings['t_rt_max']}}</li>
         <li class="list-group-item">组数(1组40个回合): {{$settings['n']}}</li>
         <li class="list-group-item">步骤4、5的总时间: {{$settings['t_total']}}</li>
+        <li class="list-group-item">是否重试: {{$settings['retry'] ? '是' : '否'}}</li>
         {{--<li class="list-group-item">回合数(默认为 组数 * 40): {{$settings['nn']}}</li>--}}
       </ul>
     </div>
