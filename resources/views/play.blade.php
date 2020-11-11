@@ -357,8 +357,8 @@
                     'time_details': $oneRoundCost,
                 };
                 console.log(submitItem);
-console.log($oneRoundAws)
-                if ($oneRoundAws.is_ok) {
+                // console.log($oneRoundAws)
+                if (true) {
                     $submitData.push(submitItem);
                 } else {
                     console.log('repush', $roundList[$currentRound - 1]);
