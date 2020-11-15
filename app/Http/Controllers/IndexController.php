@@ -37,12 +37,12 @@ class IndexController extends Controller
     {
         $settings = Redis::hgetall('settings');
         $settings = [
-            't_guide' => $settings['t_guide'] ?? 100,
-            't_interval' => $settings['t_interval'] ?? 400,
-            't_rt_max' => $settings['t_rt_max'] ?? 1700,
-            'n' => $settings['n'] ?? 10,
-            't_total' => $settings['t_total'] ?? 3500,
-            'retry' => $settings['retry'] ?? 0,
+            't_guide' => (int)($settings['t_guide'] ?? 100),
+            't_interval' => (int)($settings['t_interval'] ?? 400),
+            't_rt_max' => (int)($settings['t_rt_max'] ?? 1700),
+            'n' => (int)($settings['n'] ?? 10),
+            't_total' => (int)($settings['t_total'] ?? 3500),
+            'retry' => (int)($settings['retry'] ?? 0),
             // 'nn' => $settings['nn'] ?? 0,
         ];
 
@@ -201,7 +201,8 @@ class IndexController extends Controller
             'student_no' => session('student_no', ''),
             'user_agent' => $request->userAgent(),
             'ip' => $request->ip(),
-            'data' => $request->all(),
+            'data' => $request->input('data'),
+            'stat' => $request->input('stat'),
         ];
 
         $result = Data::create($data);
@@ -246,20 +247,25 @@ class IndexController extends Controller
 
     public function success(Request $request)
     {
-        $count = 0;
+        $times = 0;
         if (session('student_no')) {
-            $count = Data::where([
-                'name' => session('name'),
-                'class' => session('class'),
-                'student_no' => session('student_no'),
-                'grade' => session('grade'),
-                'school' => session('school'),
+            $times = Data::where([
+                'name' => session('name', 'quick_test'),
+                'class' => session('class', ''),
+                'student_no' => session('student_no', ''),
+                'grade' => session('grade', ''),
+                'school' => session('school', ''),
             ])->count();
         }
 
+        $stat = Data::where('id', session('last_id'))->value('stat');
+        $score = (int)$stat['right'] * 100 / ($stat['right'] + $stat['wrong']);
+
         return view('success', [
             'name' => session('name'),
-            'count' => $count,
+            'times' => $times,
+            'stat' => $stat,
+            'score' => $score,
         ]);
     }
 }

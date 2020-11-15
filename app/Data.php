@@ -10,5 +10,6 @@ class Data extends Model
 
     protected $casts = [
         'data' => 'array',
+        'stat' => 'array',
     ];
 }

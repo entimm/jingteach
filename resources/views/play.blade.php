@@ -98,6 +98,12 @@
     var $startTime = 0;
 
     var $settings = {};
+    var $stat = {
+        right: 0,
+        wrong: 0,
+        miss: 0,
+        round_count: 0
+    }
 
     var $oneRoundCost = {};
     var $oneRoundAws = {};
@@ -115,6 +121,8 @@
         var $guideList = $data.guideList;
         var $goalList = $data.goalList;
         var $correctMap = $data.correctMap;
+
+        $stat.round_count = $roundList.length;
 
         $settings = $data.settings;
 
@@ -164,10 +172,17 @@
             $round = $roundList[$currentRound - 1];
             if ($answer == $correctMap[$goalList[$round.goalId][1]]) {
                 $oneRoundAws['is_ok'] = 1;
+                $stat.right++;
                 // console.log('对！');
                 $audioOk.play();
             } else {
                 $oneRoundAws['is_ok'] = 0;
+                if ($answer) {
+                    $stat.wrong++;
+                } else {
+                    $stat.miss++;
+                }
+                
                 // console.log('错！');
                 $audioBad.play();
             }
@@ -182,8 +197,12 @@
             $.ajax({
                 type: 'POST',
                 url: '/submit',
-                data: JSON.stringify($submitData),
-                contentType: 'application/json',
+                data: {
+                    data: $submitData,
+                    stat: $stat
+                },
+                dataType: 'json',
+                // contentType: 'application/json',
                 success: function(data) {
                     setTimeout(function () {
                         window.location.href = '/success';
