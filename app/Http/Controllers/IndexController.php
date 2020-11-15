@@ -232,7 +232,7 @@ class IndexController extends Controller
 
     public function export($start = null, $end = null)
     {
-        ini_set('memory_limit', '2048M');
+        ini_set('memory_limit', '5120M');
 
         $end = $end ?? $start;
 
