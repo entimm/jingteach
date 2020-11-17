@@ -203,7 +203,7 @@ class IndexController extends Controller
             'user_agent' => $request->userAgent(),
             'ip' => $request->ip(),
             'data' => $request->input('data'),
-            'stat' => $request->input('stat'),
+            'stat' => $request->input('stat') ?: [],
         ];
 
         $result = Data::create($data);
