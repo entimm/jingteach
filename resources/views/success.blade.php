@@ -26,9 +26,11 @@
                 <h2 class="weui-msg__title">GAME OVER</h2>
                 <p class="weui-msg__desc">感谢您的配合</p>
             </div>
+            @if($stat)
             <div class="weui-msg__text-area">
                 <h2 class="weui-msg__title score">得分: {{$score}}</h2>
             </div>
+            @endif
             @if(session('student_no'))
                 <div class="weui-msg__text-area">
                     <p class="weui-msg__desc"><i>{{$name}}</i> 已经完成 <i>{{$times}}次</i> 测试</p>

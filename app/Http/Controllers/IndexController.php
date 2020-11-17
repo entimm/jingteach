@@ -6,6 +6,7 @@ use App\Data;
 use App\Exports\DataExport;
 use App\Exports\DataRawExport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
 class IndexController extends Controller
@@ -259,7 +260,12 @@ class IndexController extends Controller
         }
 
         $stat = Data::where('id', session('last_id'))->value('stat');
-        $score = (int)$stat['right'] * 100 / ($stat['right'] + $stat['wrong']);
+        $score = 0;
+        if ($stat) {
+            $score = (int)$stat['right'] * 100 / ($stat['right'] + $stat['wrong']);
+        } else {
+            Log::info('找不到play stat', session()->all());
+        }
 
         return view('success', [
             'name' => session('name'),
