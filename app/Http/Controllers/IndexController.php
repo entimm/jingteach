@@ -202,7 +202,7 @@ class IndexController extends Controller
             'student_no' => session('student_no', ''),
             'user_agent' => $request->userAgent(),
             'ip' => $request->ip(),
-            'data' => $request->input('data'),
+            'data' => $request->input('data') ?: [],
             'stat' => $request->input('stat') ?: [],
         ];
 
