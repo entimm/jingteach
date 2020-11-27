@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\DataExport;
 use Illuminate\Foundation\Inspiring;
 
 /*
@@ -16,3 +17,18 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('export', function () {
+    ini_set('memory_limit', '102400M');
+    $start = null;
+    $end = null;
+
+    $end = $end ?? $start;
+
+    $filter = [
+        'start' => $start,
+        'end' => $end,
+    ];
+
+    (new DataExport($filter))->store('data.xlsx');
+})->describe('export');

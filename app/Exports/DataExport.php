@@ -67,6 +67,9 @@ class DataExport implements FromArray, WithHeadings
                 2 => '女',
             ];
             foreach ($item->data as $one) {
+                if (empty($one['goalId'])) {
+                    continue;
+                }
                 $rightAnswer = in_array($one['goalId'], [3, 4, 5, 6]) ? 1 : 2;
                 $result[] = [
                     'id' => $item->id,
